@@ -1,0 +1,38 @@
+---
+import Colophon from "../components/Colophon.astro";
+
+interface Props {
+    bodyClass: string;
+    siteClass: string;
+    namespace: string;
+}
+
+const { bodyClass, siteClass, namespace } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Barba - once + router + SVG morph</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style/global.css">
+  <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="https://unpkg.com/@barba/core"></script>
+  <script src="https://unpkg.com/@barba/router"></script>
+</head>
+<body class={bodyClass}>
+  <div data-barba="wrapper" data-barba-namespace={namespace}>
+    <div data-barba="container">
+      <div class={siteClass}>
+        <slot />
+      </div>
+    </div>
+  </div>
+  <Colophon />
+  <script type="module" src="/scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+$c-black: #000;
+$c-white: #fff;
+$c-gray-dark: #394042;
+$c-gray-medium: #4d5355;
+$c-gray-light: #9a9a9a;
+$c-blue: #3665ea;
+$c-green: #60f6a8;
+$c-pink: #ec43dd;
+
+$c-bg: $c-black;
+$c-text: $c-white;
+
+$ff-default: "Space Mono", monospace;
+$ff-fake: Redacted;
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+@font-face {
+  font-family: "BLOKK";
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/12747/BLOKKNeue-Regular.otf");
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Redacted";
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/12747/redacted-regular.woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
+html {
+  font-size: calc(1em * 0.625);
+}
+
+body {
+  font: 1vw / 2 $ff-default;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+.text {
+  font-family: $ff-default;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+//Avoid typekit FOUT
+html {
+  overflow: hidden;
+
+  &.js {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+    &.wf-active,
+    &.wf-inactive,
+    &.ready {
+      opacity: 1;
+    }
+  }
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  background-color: $c-bg;
+  color: $c-text;
+
+  // SVG sprite
+  & > svg {
+    display: none;
+  }
+}
+
+// RWD
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+p {
+  margin: 2em 0;
+}
+
+.site,
+[class*="site--"] {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+
+  .home & {
+    height: 200vh;
+  }
+}
+
+[class*="site--"][class*="--pink"] {
+  color: $c-pink;
+  background-color: fade-out($c-pink, 0.7);
+}
+
+[class*="site--"][class*="--blue"] {
+  color: $c-blue;
+  background-color: fade-out($c-blue, 0.7);
+}
+
+[class*="site--"][class*="--green"] {
+  color: $c-green;
+  background-color: fade-out($c-green, 0.7);
+}
+
+.picture,
+[class*="picture--"] {
+  height: 40vh;
+  background-color: $c-gray-dark;
+  background-image: url("../images/picture-light.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: auto 30%;
+  border-radius: 0.4rem;
+}
+
+[class*="--pink"] .picture,
+[class*="picture--"][class*="--pink"] {
+  background-color: $c-pink;
+  background-image: url("../images/picture-dark.png");
+}
+
+[class*="--blue"] .picture,
+[class*="picture--"][class*="--blue"] {
+  background-color: $c-blue;
+  background-image: url("../images/picture-dark.png");
+}
+
+[class*="--green"] .picture,
+[class*="picture--"][class*="--green"] {
+  background-color: $c-green;
+  background-image: url("../images/picture-dark.png");
+}
+
+.colophon {
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: $c-blue;
+  color: $c-white;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out;
+
+  &:hover {
+    background-color: $c-white;
+    color: $c-blue;
+  }
+}
+
+.main {
+  width: 70%;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+
+.intro {
+  width: 100%;
+  max-width: none;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $c-black;
+  font-size: 1.25em;
+  text-align: center;
+}
+
+.intro__title,
+.intro__subtitle,
+.intro__link {
+  will-change: transform, opacity;
+}
+
+.intro__title {
+  margin: -0.25em 0 0;
+  font-size: 4em;
+}
+
+.intro__subtitle {
+  margin: 0 0 2em;
+  color: $c-gray-medium;
+}
+
+.intro__link {
+  color: $c-blue;
+  text-decoration: none;
+
+  &:hover {
+    color: $c-green;
+  }
+}
+
+.shape-outer {
+  position: relative;
+  z-index: 10;
+  margin-top: -0.5rem;
+  pointer-events: none;
+}
+
+.shape {
+  height: 100vh;
+  width: 100%;
+  display: block;
+  transform-origin: 50% 0;
+  fill: $c-pink;
+  fill: $c-black;
+  will-change: transform;
+}
+
+.back {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  color: $c-white;
+  text-decoration: none;
+
+  &:hover {
+    color: $c-blue;
+  }
+}
+
+[data-barba="wrapper"] {
+  position: relative;
+}
+
+[data-barba="container"] {
+  will-change: transform;
+
+  .is-animating > & {
+    position: absolute;
+    width: 100%;
+  }
+}
